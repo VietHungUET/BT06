@@ -1,37 +1,34 @@
 #include<bits/stdc++.h>
-
 using namespace std;
-
-int n, k,m;
-int Bool[200];
-char kytu[200];
-
-void xuat()
+int n,a[15];
+void xuat(int n)
 {
-	for (int i = 1; i <= m; i++)
-		cout << kytu[i];
-	cout << endl;
+    for(int i=1; i<n; i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<a[n]<<endl;
 }
-
-void Try(int k,int n,int m )
+void Check(int i, int k, int sum)
 {
-	for (int i = 97; i <= 97 + n - 1; i++)
-	{
-		if (Bool[i]!=1)
-		{
-			kytu[k] = i;
-			Bool[i] = 1;
-			if (k == m)
-				xuat();
-			else
-				{Try(k + 1,n,m);}
-				Bool[i] = 0;
-		}
-	}
+    for(int j=k; j>=1; j--)
+    {
+        if(sum+j<=n)
+        {
+            a[i]=j;
+            sum+=j;
+            if(sum==n) xuat(i);
+            else Check(i+1,j,sum);
+            sum-=j;
+        }
+      }
 }
-
 int main()
 {
-	cin >> n >> m;
-	Try(1,n,m);
+
+cin>>n;
+Check(1,n,0);
+
+
+
 }
